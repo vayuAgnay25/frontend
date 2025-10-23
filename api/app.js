@@ -3,7 +3,7 @@ const server = express();
 const path = require('path');
 require('dotenv').config();
 
-server.use(express.static(path.join(__dirname,"./")));
+server.use(express.static(path.join(__dirname,"../../frontend")));
 
 const links = [
   "/",
@@ -18,7 +18,7 @@ const links = [
 ];
 
 function renderPage(res, link) {
-  res.sendFile(path.join(__dirname, `./${link.toLowerCase()}.html`));
+  res.sendFile(path.join(__dirname, `../${link.toLowerCase()}.html`));
 }
 
 links.forEach((link) => {
