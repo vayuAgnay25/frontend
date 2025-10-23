@@ -1,0 +1,22 @@
+<div class="login" id="Login-signup">
+  <form id="login" ng-submit="register()">
+    <h1>Welcome back</h1>
+
+    <label for="username">Username</label>
+    <input type="text" ng-model = "username" id="username" placeholder="Enter your username" required>
+
+    <label for="email">Email</label>
+    <input type="email" ng-model="email" id="email" placeholder="Enter your email" required>
+
+    <label for="password">Password</label>
+    <input type="password" ng-model="password" id="password" placeholder="Enter your password" required>
+
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" ng-model="confirmPassword" id="confirmPassword" placeholder="Confirm password" required>
+
+    <div id="message" aria-live="polite" ng-style="{'color':messageColor}">{{message}}</div>
+
+    <button type="submit">Register</button>
+  </form>
+</div>
+

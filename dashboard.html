@@ -1,0 +1,168 @@
+<div class="profile">
+  <!--  profile -->
+  <img
+    ng-click="changeDP()"
+    src="./Assets/DP/{{currentDP}}.jpeg"
+    alt=""
+    id="profilePicture"
+  />
+  <div class="details">
+    <h1>{{Name}}</h1>
+    <div class="entries">
+      <div class="ent Journal">
+        Notes
+        <h1>{{JournalCount}}</h1>
+      </div>
+      <div class="ent contacts">
+        Contacts
+        <h1>{{ContactsCount}}</h1>
+      </div>
+      <div class="ent password">
+        Password
+        <h1>{{PasswordCount}}</h1>
+      </div>
+    </div>
+  </div>
+  <div class="exit">
+    <!--  exit -->
+    <button type="button" ng-click="logout()" id="logout">
+      <img src="./Assets/power-off.png" alt="" srcset="" />
+      <h1>logout</h1>
+    </button>
+  </div>
+</div>
+
+<div class="DashboardEntries">
+  <div class="entryPage">
+    <h1>entries</h1>
+    <p>browse all your entries</p>
+    <form class="search">
+      <textarea ng-model="Query"  id="Dashquery"  placeholder="write something to search"></textarea>
+    </form>
+    <ol id="entryList">
+      <li
+        ng-if="entries.length > 0"
+        ng-repeat="x in entries| filter: {Title: Dashquery} | orderBy: '-date'"
+        ng-click="toggleSecondDialog(x)"
+      >
+        <div>
+          <img src="./Assets/icons8-pen-50.png" alt="" />
+          <div>
+            <div class="p1">{{x.Title}}</div>
+            <div class="p2">{{x.Date}}</div>
+          </div>
+        </div>
+      </li>
+      <li ng-if="entries.length == 0" class="emptyList">
+        <p id="emptyList">No entries found. Start by adding a new entry!</p>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="DashboardPasswords passwordManager">
+  <h2>Passwords Manager</h2>
+  <p>Securely store and manage your passwords for variuos websites.</p>
+  <br />
+
+  <form class="search">
+    <textarea
+      ng-model="PasswordQuery"
+      id="Dashquery2"
+      placeholder="write something to search"
+    ></textarea>
+  </form>
+
+  <h3>Passwords</h3>
+
+  <table>
+    <tr>
+      <th>Website</th>
+      <th>Username</th>
+      <th>Password</th>
+    </tr>
+
+    <tr
+      ng-repeat="password in passwords | filter: { Website: Dashquery2 }"
+            ng-if="passwords.length > 0"
+    >
+      <td>{{password.Website}}</td>
+      <td>{{password.UserName}}</td>
+      <td>{{password.Password}}</td>
+    </tr>
+
+    <tr
+      ng-if="passwords.length == 0"
+      ng-style="{background-color: messageColor}"
+    >
+      <td colspan="4">{{message}}</td>
+    </tr>
+  </table>
+
+</div>
+
+<div class="DashboardContacts contactManager">
+  <div class="contacts">
+    <h2>Contacts</h2>
+    <p>Securely store and manage your Contacts for variuos relatives.</p>
+    <form class="search">
+      <textarea
+        ng-model="nameFilter"
+        id="query"
+        placeholder="Name of person"
+      ></textarea>
+    </form>
+    <table>
+      <tr>
+        <td>Name</td>
+        <td>Contact</td>
+        <td>Email</td>
+      </tr>
+
+      <tr
+        ng-repeat="contact in contacts | filter: {Name: nameFilter} | orderBy: 'Name'"
+        ng-if="contacts.length > 0"
+      >
+        <td>{{ contact.Name }}</td>
+        <td>{{ contact.Phone }}</td>
+        <td>{{ contact.Email }}</td>
+      </tr>
+
+      <tr
+        ng-if="contacts.length == 0"
+        ng-style="{background-color: messageColor}"
+      >
+        <td colspan="4">{{message}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="entryTable">
+  <!--  profile -->
+  <h1>Inkmind: personal Dairy</h1>
+</div>
+
+<div id="dasspace"></div>
+
+<dialog
+  id="changeProfile"
+  ng-style="{'grid-template-columns': 'repeat(' + colCount + ', 1fr)'}"
+  ng-click="changeDP()"
+  close
+>
+  <button
+    type="button"
+    ng-repeat="x in DPCollection"
+    ng-click="setDP(x,$event)"
+  >
+    <img src="./Assets/DP/{{x}}.jpeg" alt="" />
+  </button>
+</dialog>
+
+<dialog id="DE">
+  <button type="button" ng-click="toggleSecondDialog(null)">X</button>
+  <h1>{{heading}}</h1>
+  <p>{{paragraph}}</p>
+  <h3>{{UserData.Name}}</h3>
+</dialog>

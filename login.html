@@ -1,0 +1,16 @@
+<div class="login" id="Login">
+  <form id="login" ng-submit="login()">
+      <h1>Welcome back</h1>
+
+      <label for="username">Username</label>
+      <input type="text" id="username" ng-model="username" placeholder="Username" autocomplete="off" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" ng-model="password" placeholder="Password" autocomplete="off" required />
+
+      <div id="message" aria-live="polite" ng-style="{'color':messageColor}">{{message}}</div>
+      <button type="submit" id="submit">Login</button>
+
+      <a href="/signup">Don't have an account? Sign up</a>
+  </form>
+</div>

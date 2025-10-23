@@ -1,0 +1,57 @@
+<div class="entryPage">
+  <h1>entries</h1>
+  <p>browse all your entries</p>
+  <form class="search">
+    <textarea
+      ng-model="Query"
+      id="query"
+      placeholder="write something to search"
+    ></textarea>
+  </form>
+  <ol id="entryList">
+    <li
+      ng-if="entries.length > 0"
+      ng-repeat="x in entries | filter: {Title: Query} | orderBy: '-date'"
+      ng-click="toggleSecondDialog(x)"
+    >
+      <div>
+        <img src="./Assets/icons8-pen-50.png" alt="" />
+        <div>
+          <div class="p1">{{x.Title}}</div>
+          <div class="p2">{{x.Date}}</div>
+        </div>
+      </div>
+      <button ng-click = "deleteEntry(x,$event)">Delete</button> 
+    </li>
+    <li ng-if="entries.length == 0" class="emptyList">
+      <p id="emptyList" ng-style="{'color': messageColor}" >{{message}}</p>
+    </li>
+  </ol>
+</div>
+
+<!-- Toggle Button -->
+<button id="toggleDialog" ng-click="toggleDialog()">+</button>
+
+<!-- Dialog -->
+<dialog id="mySecondDialog">
+  <button ng-click="toggleSecondDialog(null)">X</button>
+  <h1>{{heading}}</h1>
+  <p>{{paragraph}}</p>
+  <h3>{{UserData.Name}}</h3>
+</dialog>
+
+<dialog id="myDialog">
+  <h1>new entry</h1>
+  <p>New day, new start — seize the moment.</p>
+  <button ng-click="toggleDialog()">X</button>
+  <form name="journalForm">
+  <label for="title">Title:</label>
+  <textarea id="title" ng-model="title" placeholder="Enter your title"></textarea>
+
+  <label for="content">Content:</label>
+  <textarea id="content" ng-model="content" placeholder="Enter your content"></textarea>
+
+  <button type="button" ng-click="uploadJournal($event)">Save Entry</button>
+</form>
+
+</dialog>

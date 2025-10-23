@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <base href="/" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.min.js"></script>
+    <script src="controller.js"></script>
+
+    <link
+      rel="shortcut icon"
+      href="./Assets/icons8-pen-48.png"
+      type="image/png"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <title>InkMind</title>
+  </head>
+
+  <body ng-app="inkMindApp" ng-controller="inkMindController">
+    <div class="nav">
+      <a ng-href="/home" class="home">
+        <img src="./Assets/icons8-pen-50.png" alt="" />
+        <span>InkMind</span>
+      </a>
+      <div class="links">
+        <a
+          ng-repeat="x in User.links | removeListItem"
+          ng-href="/{{x}}"
+          ng-class="{'active': isActive('/' + x)}"
+        >
+          <button>{{x | capitalize}}</button>
+        </a>
+      </div>
+    </div>
+
+    <div class="display" ng-view></div>
+    <div class="space" id="space">
+      <p>created by vayu</p>
+      <div id="date">{{date | date:'EEE, dd MMM yyyy'}}</div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
