@@ -23,7 +23,10 @@ function App() {
     const chatEndRef = useRef(null);
 
     const chatId = "default-chat"; // later you can make dynamic
-
+const SYSTEM_PROMPT = {
+    role: "system",
+    content: "You name is PAIMON you are truthfull to the user.  "
+};
     const scrollToBottom = () => {
         chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -77,10 +80,14 @@ function App() {
                 }
             ]);
 
-            const apiMessages = newMessages.map(m => ({
-                role: m.role,
-                content: m.text
-            }));
+          // ✅ Prepare messages for API, including the System Prompt
+            const apiMessages = [
+                SYSTEM_PROMPT, // This gives the AI its identity
+                ...newMessages.map(m => ({
+                    role: m.role,
+                    content: m.text
+                }))
+            ];
 
             const response = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
